@@ -12,7 +12,7 @@ def main(dst_dir):
         if fn.is_file():
             if fn.name[-3:] == "txt":
                 text_files.append(fn.name)
-            elif fn.name[-2:] == "py" and fn.name != "bb_sub_sorter.py":
+            elif fn.name != "bb_sub_sorter.py":
                 split_name = fn.name.split("_")
                 #print(split_name)
                 file_record['fn'] = fn.name
@@ -41,12 +41,14 @@ def main(dst_dir):
         print(full_name)
         fns = full_name.split()
         print(fns)
-        reverse_name = fns[-1] + "".join(fns[:-1])
+        reverse_name = fns[-1] + "_" + "".join(fns[:-1])
         print(reverse_name)
         print()
         os.mkdir("./" + dst_dir + "/" + reverse_name)
         for f in attempt_records[netid][1]:
             shutil.copyfile(f['fn'], './' + dst_dir + "/" + reverse_name + "/" + f['basename'])
+            if f['fn'][-4:] == ".zip":
+                shutil.unpack_archive(f['fn'], './' + dst_dir + "/" + reverse_name + "/")
     print("DONE")
 # end def main()
 
