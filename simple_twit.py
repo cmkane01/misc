@@ -1,13 +1,13 @@
 # Simple Twit - A simplified interface for accessing twitter through Python
 # simple_twit.py
-# IAE 101, Fall 2021
+# IAE 101, Fall 2022
 # Authors: Christopher Kane, Greg Zborovsky
 
 import tweepy
 import sys, os, json, webbrowser
 
 # CONSTANTS
-VERSION = 0.8
+VERSION = 0.9
 CONFIG_FILE = "twitter_bot.config"
 
 #######################################
@@ -52,7 +52,7 @@ def create_api(consumer_key = None, consumer_secret = None):
         verify_access = False
     
     # Authentication Methods
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth = tweepy.OAuth1UserHandler(consumer_key, consumer_secret, callback = "oob")
 
     if verify_access:
         print("AUTHORIZING THROUGH WEB INTERFACE") 
